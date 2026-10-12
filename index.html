@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TaskFlow — organize tasks and track your productivity.">
+  <title>TaskFlow | Smart Task Management</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <a class="brand" href="#">
+        <span class="brand-icon">T</span>
+        <span>TaskFlow</span>
+      </a>
+
+      <p class="nav-heading">WORKSPACE</p>
+      <nav class="navigation" aria-label="Task filters">
+        <button class="nav-item active" data-filter="all">
+          <span>▦</span> All Tasks
+          <span class="nav-count" id="allCount">0</span>
+        </button>
+        <button class="nav-item" data-filter="today">
+          <span>◷</span> Due Today
+        </button>
+        <button class="nav-item" data-filter="pending">
+          <span>◯</span> Pending
+        </button>
+        <button class="nav-item" data-filter="completed">
+          <span>✓</span> Completed
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="profile-avatar">M</div>
+        <div>
+          <strong>My Workspace</strong>
+          <p>Personal productivity</p>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR WORKSPACE</p>
+          <h1>My Tasks</h1>
+          <p class="subtitle" id="currentDate"></p>
+        </div>
+        <button class="primary-button" id="addTaskButton">
+          + Add Task
+        </button>
+      </header>
+
+      <section class="stats-grid" aria-label="Task statistics">
+        <article class="stat-card">
+          <p>Total Tasks</p>
+          <h2 id="totalTasks">0</h2>
+          <span>All your tasks</span>
+        </article>
+        <article class="stat-card">
+          <p>In Progress</p>
+          <h2 id="pendingTasks">0</h2>
+          <span>Still to be completed</span>
+        </article>
+        <article class="stat-card">
+          <p>Completed</p>
+          <h2 id="completedTasks">0</h2>
+          <span>Tasks finished</span>
+        </article>
+        <article class="stat-card">
+          <p>Overdue</p>
+          <h2 id="overdueTasks">0</h2>
+          <span>Past their deadline</span>
+        </article>
+      </section>
+
+      <section class="task-section">
+        <div class="section-heading">
+          <div>
+            <h2>Task List</h2>
+            <p>Plan your work and make progress.</p>
+          </div>
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Search tasks..."
+            aria-label="Search tasks"
+          >
+        </div>
+
+        <div class="toolbar">
+          <div class="filter-tabs" aria-label="Filter by status">
+            <button class="tab active" data-status="all">All</button>
+            <button class="tab" data-status="pending">Pending</button>
+            <button class="tab" data-status="completed">Completed</button>
+          </div>
+
+          <select id="priorityFilter" aria-label="Filter by priority">
+            <option value="all">All priorities</option>
+            <option value="High">High priority</option>
+            <option value="Medium">Medium priority</option>
+            <option value="Low">Low priority</option>
+          </select>
+        </div>
+
+        <form id="taskForm" class="task-form" hidden>
+          <h3 id="formHeading">Create a task</h3>
+
+          <label for="taskTitle">Task title</label>
+          <input id="taskTitle" type="text" maxlength="120"
+            placeholder="e.g. Complete JavaScript practice" required>
+
+          <label for="taskDescription">Description (optional)</label>
+          <textarea id="taskDescription" rows="2" maxlength="500"
+            placeholder="What needs to be done?"></textarea>
+
+          <div class="form-row">
+            <div>
+              <label for="taskPriority">Priority</label>
+              <select id="taskPriority">
+                <option value="Low">Low</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+            <div>
+              <label for="taskDueDate">Due date</label>
+              <input id="taskDueDate" type="date">
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="secondary-button"
+              id="cancelButton">Cancel</button>
+            <button type="submit" class="primary-button"
+              id="saveButton">Save Task</button>
+          </div>
+        </form>
+
+        <div id="taskList" class="task-list"></div>
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon">✓</div>
+          <h3>No tasks here yet</h3>
+          <p>Add a task to get your work organized.</p>
+          <button class="secondary-button" id="emptyAddButton">
+            Create your first task
+          </button>
+        </div>
+
+        <p id="taskCountLabel" class="task-count"></p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
